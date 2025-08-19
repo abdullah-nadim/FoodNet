@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:FoodNet.Presentation.ViewModels"
+             x:Class="FoodNet.Presentation.Views.UserProfilePage"
+             Title="Profile"
+             BackgroundColor="{StaticResource Background}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:UserProfileViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header with Profile Image and Name -->
+            <Frame Grid.Row="0" 
+                   BackgroundColor="{StaticResource CardBackground}"
+                   BorderColor="{StaticResource Border}"
+                   CornerRadius="16"
+                   Padding="24"
+                   Margin="0,0,0,20"
+                   HasShadow="True">
+                
+                <StackLayout>
+                    <!-- Profile Image Section -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Column="0" 
+                                     HorizontalOptions="Center"
+                                     Spacing="16">
+                            
+                            <!-- Profile Image -->
+                            <Frame BackgroundColor="{StaticResource Gray100}"
+                                    BorderColor="{StaticResource Border}"
+                                    CornerRadius="50"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                    Padding="0"
+                                    HasShadow="False">
+                                
+                                <Image Source="{Binding UserProfile.ProfileImagePath}"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ChangePhotoCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Frame>
+
+                            <!-- Camera Icon Overlay -->
+                            <Frame Grid.Column="0"
+                                   BackgroundColor="{StaticResource Primary}"
+                                   BorderColor="{StaticResource Primary}"
+                                   CornerRadius="15"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   Padding="0"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="End"
+                                   Margin="0,-45,0,0">
+                                
+                                <Label Text="📷"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="White"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <!-- Edit Button -->
+                                                 <Button Grid.Column="1"
+                                 Text="Edit"
+                                 Command="{Binding EditCommand}"
+                                 IsVisible="{Binding IsViewing}"
+                                 Background="{StaticResource Primary}"
+                                 TextColor="White"
+                                 CornerRadius="8"
+                                 Margin="16,8"
+                                 FontSize="14"
+                                 FontAttributes="Bold"/>
+                    </Grid>
+
+                    <!-- User Name -->
+                    <Label Text="{Binding UserProfile.FullName}"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           HorizontalOptions="Center"
+                           Margin="0,16,0,8"/>
+
+                    <!-- Email -->
+                    <Label Text="{Binding UserProfile.Email}"
+                           FontSize="16"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,8"/>
+
+                    <!-- Location -->
+                    <Label Text="{Binding UserProfile.Location}"
+                           FontSize="14"
+                           TextColor="{StaticResource TextTertiary}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Action Buttons (Save/Cancel) -->
+            <StackLayout Grid.Row="1" 
+                         Orientation="Horizontal"
+                         Spacing="12"
+                         IsVisible="{Binding IsEditing}"
+                         Margin="0,0,0,20">
+                
+                                 <Button Text="Save"
+                         Command="{Binding SaveCommand}"
+                         Background="{StaticResource Primary}"
+                         TextColor="White"
+                         CornerRadius="8"
+                         Margin="24,12"
+                         FontSize="16"
+                         FontAttributes="Bold"
+                         HorizontalOptions="FillAndExpand"/>
+                 
+                 <Button Text="Cancel"
+                         Command="{Binding CancelCommand}"
+                         Background="{StaticResource Gray200}"
+                         TextColor="{StaticResource TextPrimary}"
+                         CornerRadius="8"
+                         Margin="24,12"
+                         FontSize="16"
+                         FontAttributes="Bold"
+                         HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+            <!-- User Details Form -->
+            <Frame Grid.Row="2"
+                   BackgroundColor="{StaticResource CardBackground}"
+                   BorderColor="{StaticResource Border}"
+                   CornerRadius="16"
+                   Padding="24"
+                   HasShadow="True">
+                
+                <StackLayout Spacing="20">
+                    <Label Text="Personal Information"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"
+                           Margin="0,0,0,8"/>
+
+                    <!-- First Name -->
+                    <StackLayout Spacing="8">
+                        <Label Text="First Name"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                                                 <Entry Text="{Binding UserProfile.FirstName}"
+                                IsReadOnly="{Binding IsViewing}"
+                                BackgroundColor="{StaticResource Gray50}"
+                                TextColor="{StaticResource TextPrimary}"
+                                Placeholder="Enter first name"
+                                PlaceholderColor="{StaticResource TextTertiary}"
+                                Margin="12,8"/>
+                    </StackLayout>
+
+                    <!-- Last Name -->
+                    <StackLayout Spacing="8">
+                        <Label Text="Last Name"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                                                 <Entry Text="{Binding UserProfile.LastName}"
+                                IsReadOnly="{Binding IsViewing}"
+                                BackgroundColor="{StaticResource Gray50}"
+                                TextColor="{StaticResource TextPrimary}"
+                                Placeholder="Enter last name"
+                                PlaceholderColor="{StaticResource TextTertiary}"
+                                Margin="12,8"/>
+                    </StackLayout>
+
+                    <!-- Email -->
+                    <StackLayout Spacing="8">
+                        <Label Text="Email"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                                                 <Entry Text="{Binding UserProfile.Email}"
+                                IsReadOnly="{Binding IsViewing}"
+                                BackgroundColor="{StaticResource Gray50}"
+                                TextColor="{StaticResource TextPrimary}"
+                                Placeholder="Enter email address"
+                                PlaceholderColor="{StaticResource TextTertiary}"
+                                Keyboard="Email"
+                                Margin="12,8"/>
+                    </StackLayout>
+
+                    <!-- Phone -->
+                    <StackLayout Spacing="8">
+                        <Label Text="Phone"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                                                 <Entry Text="{Binding UserProfile.Phone}"
+                                IsReadOnly="{Binding IsViewing}"
+                                BackgroundColor="{StaticResource Gray50}"
+                                TextColor="{StaticResource TextPrimary}"
+                                Placeholder="Enter phone number"
+                                PlaceholderColor="{StaticResource TextTertiary}"
+                                Keyboard="Telephone"
+                                Margin="12,8"/>
+                    </StackLayout>
+
+                    <!-- Date of Birth -->
+                    <StackLayout Spacing="8">
+                        <Label Text="Date of Birth"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                        <DatePicker Date="{Binding UserProfile.DateOfBirth}"
+                                    IsEnabled="{Binding IsEditing}"
+                                    BackgroundColor="{StaticResource Gray50}"
+                                    TextColor="{StaticResource TextPrimary}"/>
+                    </StackLayout>
+
+                    <!-- Location -->
+                    <StackLayout Spacing="8">
+                        <Label Text="Location"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                                                 <Entry Text="{Binding UserProfile.Location}"
+                                IsReadOnly="{Binding IsViewing}"
+                                BackgroundColor="{StaticResource Gray50}"
+                                TextColor="{StaticResource TextPrimary}"
+                                Placeholder="Enter your location"
+                                PlaceholderColor="{StaticResource TextTertiary}"
+                                Margin="12,8"/>
+                    </StackLayout>
+
+                    <!-- Bio -->
+                    <StackLayout Spacing="8">
+                        <Label Text="Bio"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                                                 <Editor Text="{Binding UserProfile.Bio}"
+                                 IsReadOnly="{Binding IsViewing}"
+                                 BackgroundColor="{StaticResource Gray50}"
+                                 TextColor="{StaticResource TextPrimary}"
+                                 Placeholder="Tell us about yourself..."
+                                 PlaceholderColor="{StaticResource TextTertiary}"
+                                 AutoSize="TextChanges"
+                                 MinimumHeightRequest="80"
+                                 Margin="12,8"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage> 

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:FoodNet.Presentation.ViewModels"
+             x:Class="FoodNet.RestaurantsPage"
+             Title="Restaurants"
+             BackgroundColor="{StaticResource Background}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:RestaurantsViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            
+            <Label Text="🏪 Restaurants"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource TextPrimary}"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0"/>
+            
+            <CollectionView ItemsSource="{Binding Restaurants}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{StaticResource CardBackground}"
+                               BorderColor="{StaticResource Border}"
+                               CornerRadius="12"
+                               Padding="15"
+                               HasShadow="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Restaurant Emoji/Image -->
+                                <Frame Grid.Column="0"
+                                       BackgroundColor="{StaticResource Gray100}"
+                                       BorderColor="{StaticResource Border}"
+                                       CornerRadius="8"
+                                       Padding="0"
+                                       WidthRequest="80"
+                                       HeightRequest="80">
+                                    <Label Text="{Binding ImageEmoji}"
+                                           FontSize="32"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Frame>
+
+                                <!-- Details -->
+                                <StackLayout Grid.Column="1" Spacing="4" Margin="15,0,0,0">
+                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}"/>
+                                    <Label Text="{Binding Cuisine}" FontSize="14" TextColor="{StaticResource TextSecondary}"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="⭐" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="{Binding Rating}" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="{Binding DeliveryTime}" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <!-- CTA -->
+                                <StackLayout Grid.Column="2" VerticalOptions="Center">
+                                    <Label Text=">" FontSize="20"/>
+                                </StackLayout>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="OnRestaurantTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage> 

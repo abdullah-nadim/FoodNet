@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FoodNet.MainPage"
+             BackgroundColor="{StaticResource Background}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="0">
+            <StackLayout Spacing="0">
+                
+                <!-- Top Banner
+                <Frame BackgroundColor="{StaticResource Primary}"
+                        BorderColor="{StaticResource Primary}"
+                        CornerRadius="0"
+                        Padding="20,40,20,30"
+                        Margin="0,0,0,20">
+                    
+                </Frame> -->
+
+                <!-- Ads Banner + Search (below header) -->
+                <StackLayout Padding="20,0,20,20" Spacing="20">
+                    <!-- Ads Carousel -->
+                    <CarouselView HeightRequest="140"
+                                  IndicatorView="{x:Reference adsIndicators}"
+                                  PeekAreaInsets="40,0,40,0">
+                        <CarouselView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>🔥 20% OFF on Pizza Today</x:String>
+                                <x:String>🚚 Free Delivery on Orders $25+</x:String>
+                                <x:String>🎁 Buy 1 Get 1 on Selected Sushi</x:String>
+                            </x:Array>
+                        </CarouselView.ItemsSource>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{StaticResource Primary}" BorderColor="{StaticResource Primary}" CornerRadius="16" Padding="20" HasShadow="True" Margin="0,0,0,10">
+                                    <Label Text="{Binding .}" FontSize="18" FontAttributes="Bold" TextColor="White"/>
+                                </Frame>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView x:Name="adsIndicators" HorizontalOptions="Center"/>
+
+                    <!-- Search Bar moved below banner -->
+                    <Frame BackgroundColor="White" BorderColor="Transparent" CornerRadius="25" Padding="20,12" Margin="0,0,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="🔍" FontSize="18" VerticalOptions="Center" Margin="0,0,10,0"/>
+                            <Entry Grid.Column="1" Placeholder="Search for restaurants, dishes..." PlaceholderColor="{StaticResource TextTertiary}" TextColor="{StaticResource TextPrimary}" FontSize="16" VerticalOptions="Center"/>
+                            <Button Grid.Column="2" Text="📍" Background="Transparent" TextColor="{StaticResource Primary}" FontSize="18" Margin="0" VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <StackLayout Spacing="15">
+                        <Label Text="Special Offers"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                            <StackLayout Orientation="Horizontal" Spacing="15">
+                                
+                                <!-- Offer 1 -->
+                                <Frame BackgroundColor="{StaticResource Primary}"
+                                        BorderColor="{StaticResource Primary}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="200"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout Spacing="8">
+                                        <Label Text="🎉"
+                                               FontSize="24"
+                                               HorizontalOptions="Start"/>
+                                        
+                                        <Label Text="50% OFF"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="White"
+                                               HorizontalOptions="Start"/>
+                                        
+                                        <Label Text="On your first order"
+                                               FontSize="12"
+                                               TextColor="White"
+                                               Opacity="0.9"
+                                               HorizontalOptions="Start"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <!-- Offer 2 -->
+                                <Frame BackgroundColor="{StaticResource Tertiary}"
+                                        BorderColor="{StaticResource Tertiary}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="200"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout Spacing="8">
+                                        <Label Text="🚚"
+                                               FontSize="24"
+                                               HorizontalOptions="Start"/>
+                                        
+                                        <Label Text="Free Delivery"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="White"
+                                               HorizontalOptions="Start"/>
+                                        
+                                        <Label Text="Orders over $25"
+                                               FontSize="12"
+                                               TextColor="White"
+                                               Opacity="0.9"
+                                               HorizontalOptions="Start"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <!-- Offer 3 -->
+                                <Frame BackgroundColor="{StaticResource Magenta}"
+                                        BorderColor="{StaticResource Magenta}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="200"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout Spacing="8">
+                                        <Label Text="🎁"
+                                               FontSize="24"
+                                               HorizontalOptions="Start"/>
+                                        
+                                        <Label Text="Buy 1 Get 1"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="White"
+                                               HorizontalOptions="Start"/>
+                                        
+                                        <Label Text="On selected items"
+                                               FontSize="12"
+                                               TextColor="White"
+                                               Opacity="0.9"
+                                               HorizontalOptions="Start"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </StackLayout>
+
+                    <!-- Food Categories -->
+                    <StackLayout Spacing="15">
+                    
+                    <!-- Categories Section -->
+                    <StackLayout Spacing="15">
+                        <Label Text="Categories"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+                        
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                            <StackLayout Orientation="Horizontal" Spacing="15">
+                                
+                                <!-- Pizza Category -->
+                                <Frame BackgroundColor="{StaticResource CardBackground}"
+                                        BorderColor="{StaticResource Border}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="100"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout HorizontalOptions="Center" Spacing="8">
+                                        <Label Text="🍕"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"/>
+                                        <Label Text="Pizza"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource TextPrimary}"
+                                               HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <!-- Burger Category -->
+                                <Frame BackgroundColor="{StaticResource CardBackground}"
+                                        BorderColor="{StaticResource Border}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="100"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout HorizontalOptions="Center" Spacing="8">
+                                        <Label Text="🍔"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"/>
+                                        <Label Text="Burgers"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource TextPrimary}"
+                                               HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <!-- Sushi Category -->
+                                <Frame BackgroundColor="{StaticResource CardBackground}"
+                                        BorderColor="{StaticResource Border}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="100"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout HorizontalOptions="Center" Spacing="8">
+                                        <Label Text="🍣"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"/>
+                                        <Label Text="Sushi"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource TextPrimary}"
+                                               HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <!-- Dessert Category -->
+                                <Frame BackgroundColor="{StaticResource CardBackground}"
+                                        BorderColor="{StaticResource Border}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="100"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout HorizontalOptions="Center" Spacing="8">
+                                        <Label Text="🍰"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"/>
+                                        <Label Text="Desserts"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource TextPrimary}"
+                                               HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <!-- Coffee Category -->
+                                <Frame BackgroundColor="{StaticResource CardBackground}"
+                                        BorderColor="{StaticResource Border}"
+                                        CornerRadius="12"
+                                        Padding="20,15"
+                                        WidthRequest="100"
+                                        HasShadow="True">
+                                    
+                                    <StackLayout HorizontalOptions="Center" Spacing="8">
+                                        <Label Text="☕"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"/>
+                                        <Label Text="Coffee"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource TextPrimary}"
+                                               HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+
+                    <!-- Popular Food Items -->
+                    <StackLayout Spacing="15">
+                        <Label Text="Popular Now"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Item 1 -->
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource CardBackground}" BorderColor="{StaticResource Border}" CornerRadius="12" Padding="15" HasShadow="True">
+                                <StackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource Gray100}" BorderColor="{StaticResource Border}" CornerRadius="8" Padding="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                                        <Label Text="🍕" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label Text="Margherita Pizza" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" HorizontalOptions="Center"/>
+                                    <Label Text="Italian Restaurant" FontSize="12" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="Center">
+                                        <Label Text="⭐ 4.8" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="25-35 min" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                    <Label Text="$12.99" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <!-- Item 2 -->
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource CardBackground}" BorderColor="{StaticResource Border}" CornerRadius="12" Padding="15" HasShadow="True">
+                                <StackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource Gray100}" BorderColor="{StaticResource Border}" CornerRadius="8" Padding="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                                        <Label Text="🍔" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label Text="Classic Burger" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" HorizontalOptions="Center"/>
+                                    <Label Text="Burger House" FontSize="12" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="Center">
+                                        <Label Text="⭐ 4.6" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="20-30 min" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                    <Label Text="$9.99" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <!-- Item 3 -->
+                            <Frame Grid.Row="0" Grid.Column="2" BackgroundColor="{StaticResource CardBackground}" BorderColor="{StaticResource Border}" CornerRadius="12" Padding="15" HasShadow="True">
+                                <StackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource Gray100}" BorderColor="{StaticResource Border}" CornerRadius="8" Padding="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                                        <Label Text="🍣" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label Text="Salmon Sushi Roll" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" HorizontalOptions="Center"/>
+                                    <Label Text="Sushi Master" FontSize="12" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="Center">
+                                        <Label Text="⭐ 4.9" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="30-45 min" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                    <Label Text="$15.99" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <!-- Item 4 -->
+                            <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource CardBackground}" BorderColor="{StaticResource Border}" CornerRadius="12" Padding="15" HasShadow="True">
+                                <StackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource Gray100}" BorderColor="{StaticResource Border}" CornerRadius="8" Padding="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                                        <Label Text="🍰" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label Text="Cheesecake" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" HorizontalOptions="Center"/>
+                                    <Label Text="Dessert Shop" FontSize="12" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="Center">
+                                        <Label Text="⭐ 4.7" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="15-25 min" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                    <Label Text="$6.49" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <!-- Item 5 -->
+                            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource CardBackground}" BorderColor="{StaticResource Border}" CornerRadius="12" Padding="15" HasShadow="True">
+                                <StackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource Gray100}" BorderColor="{StaticResource Border}" CornerRadius="8" Padding="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                                        <Label Text="☕" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label Text="Cappuccino" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" HorizontalOptions="Center"/>
+                                    <Label Text="Coffee House" FontSize="12" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="Center">
+                                        <Label Text="⭐ 4.5" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="10-15 min" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                    <Label Text="$3.99" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <!-- Item 6 -->
+                            <Frame Grid.Row="1" Grid.Column="2" BackgroundColor="{StaticResource CardBackground}" BorderColor="{StaticResource Border}" CornerRadius="12" Padding="15" HasShadow="True">
+                                <StackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource Gray100}" BorderColor="{StaticResource Border}" CornerRadius="8" Padding="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center">
+                                        <Label Text="🍝" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label Text="Pasta Alfredo" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" HorizontalOptions="Center"/>
+                                    <Label Text="Italiano Bistro" FontSize="12" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="Center">
+                                        <Label Text="⭐ 4.7" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                        <Label Text="25-35 min" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    </StackLayout>
+                                    <Label Text="$10.49" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+
+                    
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <Frame Grid.Row="1"
+               BackgroundColor="{StaticResource CardBackground}"
+               BorderColor="{StaticResource Border}"
+               CornerRadius="0"
+               Padding="0"
+               HasShadow="True">
+            
+            <Grid Padding="20,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Offers Tab -->
+                <StackLayout Grid.Column="0" 
+                             HorizontalOptions="Center"
+                             Spacing="4">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOffersTapped" />
+                    </StackLayout.GestureRecognizers>
+                    
+                    <Label Text="🎉"
+                           FontSize="20"
+                           HorizontalOptions="Center"/>
+                    
+                    <Label Text="Offers"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <!-- Restaurants Tab -->
+                <StackLayout Grid.Column="1" 
+                             HorizontalOptions="Center"
+                             Spacing="4">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRestaurantsTapped" />
+                    </StackLayout.GestureRecognizers>
+                    
+                    <Label Text="🏪"
+                           FontSize="20"
+                           HorizontalOptions="Center"/>
+                    
+                    <Label Text="Restaurants"
+                           FontSize="12"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <!-- Orders Tab -->
+                <StackLayout Grid.Column="2" 
+                             HorizontalOptions="Center"
+                             Spacing="4">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOrdersTapped" />
+                    </StackLayout.GestureRecognizers>
+                    
+                    <Label Text="📋"
+                           FontSize="20"
+                           HorizontalOptions="Center"/>
+                    
+                    <Label Text="Orders"
+                           FontSize="12"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <!-- Profile Tab -->
+                <StackLayout Grid.Column="3" 
+                             HorizontalOptions="Center"
+                             Spacing="4">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProfileTapped" />
+                    </StackLayout.GestureRecognizers>
+                    
+                    <Label Text="👤"
+                           FontSize="20"
+                           HorizontalOptions="Center"/>
+                    
+                    <Label Text="Profile"
+                           FontSize="12"
+                           TextColor="{StaticResource TextSecondary}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

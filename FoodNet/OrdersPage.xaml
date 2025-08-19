@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:FoodNet.Presentation.ViewModels"
+             x:Class="FoodNet.OrdersPage"
+             Title="Orders"
+             BackgroundColor="{StaticResource Background}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:OrdersViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            
+            <Label Text="📋 My Orders"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource TextPrimary}"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0"/>
+            
+            <CollectionView ItemsSource="{Binding Orders}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{StaticResource CardBackground}"
+                               BorderColor="{StaticResource Border}"
+                               CornerRadius="12"
+                               Padding="16"
+                               HasShadow="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Restaurant}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalFormatted}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Summary}" FontSize="14" TextColor="{StaticResource TextSecondary}"/>
+
+                                <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                                    <Label Text="{Binding StatusText}" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    <Label Text="•" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                    <Label Text="{Binding PlacedAt, StringFormat='{}{0:MMM d, h:mm tt}'}" FontSize="12" TextColor="{StaticResource TextSecondary}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Start Ordering"
+                    Background="{StaticResource Primary}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Margin="0,10,0,20"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Clicked="OnStartOrderingClicked"/>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage> 
